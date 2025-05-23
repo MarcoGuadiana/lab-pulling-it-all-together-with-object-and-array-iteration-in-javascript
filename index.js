@@ -114,3 +114,121 @@ function gameObject() {
         },
     };
 }
+
+function numPointsScored(playerName) {
+
+   
+    if(gameObject().home.players[playerName]) {
+        return gameObject().home.players[playerName].points;
+    }
+    else if (gameObject().away.players[playerName]) {
+        return gameObject().away.players[playerName].points; 
+    }
+    else {
+        return "Player not found!"
+    }
+}
+
+console.log(numPointsScored("Brook Lopez")); 
+
+
+
+function shoeSize(playerName) {
+    if(gameObject().home.players[playerName]) {
+        return gameObject().home.players[playerName].shoe; 
+
+    }
+
+    else if (gameObject().away.players[playerName]) {
+        return (gameObject().away.players[playerName].shoe)
+    }
+    
+    else {
+        return "Player not Found!" 
+    }
+}
+
+
+function teamColors(teamName) { 
+    
+   if (teamName === gameObject().home.teamName) {
+    return gameObject().home.colors; 
+
+   }
+    else if (teamName === gameObject().away.teamName) {
+        return gameObject().away.colors; 
+    }
+    
+    else {
+        return "Team not Found!" ;
+    }
+    
+}
+
+function teamNames() {
+    const a =  gameObject().home.teamName;   
+    const b = gameObject().away.teamName; 
+
+    return[a, b]; 
+    
+
+}
+
+
+function playerNumbers(teamName) {
+  
+     
+  const game = gameObject(); // Call the function to get the data
+  const numbers = [];
+
+  for (let side in game) {
+    const team = game[side];
+    if (team.teamName === teamName) {
+      for (let player in team.players) {
+        numbers.push(team.players[player].number);
+      }
+    }
+  }
+
+  return numbers;
+
+}
+
+function playerStats(playerName) {
+    let game = gameObject(); 
+  for (let side in game) {
+    const players = game[side].players;
+
+    if (players[playerName]) {
+      return players[playerName]; // Return the stats object
+    }
+  }
+
+  return "Player not found";
+
+}
+
+
+// **`bigShoeRebounds()`**  
+   //Finds the player with the largest shoe size and returns their number of rebounds.
+
+function bigShoeRebounds() {
+    const allPlayers = {
+        ...gameObject().home.players,
+        ...gameObject().away.players 
+    };
+
+    let largestShoe =0; 
+    let rebounds =0;
+
+    for (let player in allPlayers) {
+        const stats = allPlayers[player]; 
+        if(stats.shoe > largestShoe) {
+            largestShoe = stats.shoe;
+            rebounds = stats.rebounds;
+        }
+    }
+    return rebounds; 
+        }
+        
+console.log(bigShoeRebounds()); 
